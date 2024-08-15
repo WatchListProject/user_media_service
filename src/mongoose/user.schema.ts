@@ -15,7 +15,7 @@ export class Media {
   mediaType: string; // The type of the media in the corresponding media API ej: mediaType=Movie
 
   @Prop({ required: true })
-  seen: boolean;
+  seenStatus: boolean;
 }
 
 export const MediaSchema = SchemaFactory.createForClass(Media);
