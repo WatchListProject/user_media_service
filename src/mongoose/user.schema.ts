@@ -24,19 +24,41 @@ export class Media {
 
 export const MediaSchema = SchemaFactory.createForClass(Media);
 
+export enum AuthProvider {
+  GOOGLE = 'GOOGLE',
+  WATCHLIST = 'WATCHLIST',
+}
+
 @Schema()
 export class User {
   @Prop({
     required: true,
-    unique: true
+    unique: true,
   })
   email: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    enum: AuthProvider,
+  })
+  authProvider: AuthProvider;
+
+  @Prop({ required: function () { return this.authProvider === AuthProvider.WATCHLIST; } })
   password: string;
 
-  @Prop({ type: [MediaSchema], default: [] }) // Explicitly defining the type as an array of MediaSchema
+  @Prop({ default: [] })
   mediaList: Media[];
+
+  @Prop({ required: false })
+  uid: string;
 }
 
+
+
+
 export const UserSchema = SchemaFactory.createForClass(User);
+
+
+
+
+

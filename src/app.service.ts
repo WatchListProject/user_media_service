@@ -16,9 +16,7 @@ export class AppService {
 
   async getUserMediaList(request: GetUserMediaListRequest): Promise<GetUserMediaListResponse> {
     try {
-      const userId = new Types.ObjectId(request.userId);
-      const user = await this.userModel.findById(userId).exec();
-
+      const user = await this.userModel.findOne({ email: request.email }).exec();
       if (!user) {
         throw new RpcException({ code: status.NOT_FOUND, message: 'User not found' });
       }
@@ -32,6 +30,7 @@ export class AppService {
 
       return { mediaList };
     } catch (error) {
+      console.log(error);
       throw new RpcException({ code: status.INTERNAL, message: 'Error getting user media: ' + error.message });
 
     }
@@ -40,8 +39,7 @@ export class AppService {
 
   async addMediaToUser(request: AddMediaToUserRequest): Promise<AddMediaToUserResponse> {
     try {
-      const userId = new Types.ObjectId(request.userId);
-      const user = await this.userModel.findById(userId).exec();
+      const user = await this.userModel.findOne({ email: request.email }).exec();
 
       if (!user) {
         throw new RpcException({ code: status.NOT_FOUND, message: 'User not found' });
@@ -75,8 +73,7 @@ export class AppService {
 
   async setSeenStatus(request: SetSeenStatusRequest): Promise<SetSeenStatusResponse> {
     try {
-      const userId = new Types.ObjectId(request.userId);
-      const user = await this.userModel.findById(userId).exec();
+      const user = await this.userModel.findOne({ email: request.email }).exec();
 
       if (!user) {
         throw new RpcException({ code: status.NOT_FOUND, message: 'User not found' });
@@ -103,8 +100,7 @@ export class AppService {
 
   async deleteMediaFromUser(request: DeleteMediaFromUserRequest): Promise<DeleteMediaFromUserResponse> {
     try {
-      const userId = new Types.ObjectId(request.userId);
-      const user = await this.userModel.findById(userId).exec();
+      const user = await this.userModel.findOne({ email: request.email }).exec();
 
       if (!user) {
         throw new RpcException({ code: status.NOT_FOUND, message: 'User not found' });

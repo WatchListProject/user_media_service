@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 export const protobufPackage = "user";
 
 export interface GetUserMediaListRequest {
-  userId: string;
+  email: string;
 }
 
 export interface GetUserMediaListResponse {
@@ -19,7 +19,7 @@ export interface GetUserMediaListResponse {
 }
 
 export interface AddMediaToUserRequest {
-  userId: string;
+  email: string;
   mediaId: string;
   mediaType: string;
 }
@@ -30,7 +30,7 @@ export interface AddMediaToUserResponse {
 }
 
 export interface DeleteMediaFromUserRequest {
-  userId: string;
+  email: string;
   mediaId: string;
 }
 
@@ -40,7 +40,7 @@ export interface DeleteMediaFromUserResponse {
 }
 
 export interface SetSeenStatusRequest {
-  userId: string;
+  email: string;
   mediaId: string;
   seenStatus: boolean;
 }

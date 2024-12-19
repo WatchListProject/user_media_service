@@ -10,6 +10,7 @@ export class AppController implements UserMediaServiceController {
 
   @GrpcMethod('UserMediaService', 'GetUserMediaList')
   getUserMediaList(request: GetUserMediaListRequest): Promise<GetUserMediaListResponse> {
+    console.log(request);
     return this.appService.getUserMediaList(request);
   }
 
@@ -27,7 +28,6 @@ export class AppController implements UserMediaServiceController {
   setSeenStatus(request: SetSeenStatusRequest): Promise<SetSeenStatusResponse> {
     return this.appService.setSeenStatus(request);
   }
-
 
 
 }
