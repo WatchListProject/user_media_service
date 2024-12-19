@@ -8,7 +8,7 @@ export class Media {
   @Prop({ required: true })
   mediaId: string; // The ID of the media in the corresponding media API
 
-  @Prop({ 
+  @Prop({
     required: true,
     enum: ['MOVIE', 'SERIE'] // Enum to restrict values
   })
@@ -16,6 +16,10 @@ export class Media {
 
   @Prop({ required: true })
   seenStatus: boolean;
+
+  @Prop({ required: true, default: Date.now() }) // Automatically sets the current date and time
+  addedAt: Date;
+
 }
 
 export const MediaSchema = SchemaFactory.createForClass(Media);

@@ -27,6 +27,7 @@ export class AppService {
         mediaId: media.mediaId,
         mediaType: media.mediaType,
         seenStatus: media.seenStatus,
+        addedAt: media.addedAt.toISOString(),
       }));
 
       return { mediaList };
@@ -54,11 +55,14 @@ export class AppService {
         return { success: false, message: 'Media already exists in user list' };
       }
 
+
       user.mediaList.push({
         mediaId: request.mediaId,
         mediaType: request.mediaType,
-        seenStatus: false, // Assuming new media is initially not seen
+        seenStatus: false,
+        addedAt: new Date(),
       });
+
 
       await user.save();
 
